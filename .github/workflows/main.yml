@@ -31,4 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
           npm install
-          npm build
+          npm run build
