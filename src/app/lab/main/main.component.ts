@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Lab } from 'src/app/interfaces/lab';
+import { LabService } from '../lab.service';
 
 @Component({
   selector: 'app-main',

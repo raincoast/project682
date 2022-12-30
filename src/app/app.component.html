@@ -14,6 +14,83 @@
         <input type="text" placeholder="Search" class="outline-0 text-base h-9 font-normal w-full ">
       </div>
     </div>
+    <div class="user_info w-8 h-8 cursor-pointer rounded-full">
+
+      <div class="flex justify-center">
+        <div>
+          <div class="dropdown relative">
+            <button class="
+                dropdown-toggle
+                w-8
+                h-8
+                text-white
+                font-medium
+                text-xs
+                leading-tight
+                rounded
+                transition
+                duration-150
+                ease-in-out
+                flex
+                items-center
+                whitespace-nowrap
+              " type="button" id="user_info_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="gray"
+                className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+            <ng-container *ngIf="!(auth.isAuthenticated$ | async); else userinfo">
+              <ul
+                class="dropdown-menu min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 w-72 bg-clip-padding border-none"
+                aria-labelledby="user_info_dropdown">
+                <li>
+                  <a class=" dropdown-item text-sm py-2 px-5 font-normal w-full whitespace-nowrap bg-transparent flex gap-3 items-center text-gray-700 hover:bg-gray-100"
+                    (click)="auth.loginWithRedirect()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                      stroke="currentColor" class="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+
+                    <span>Login</span></a>
+                </li>
+              </ul>
+            </ng-container>
+
+            <ng-template #userinfo>
+              <ul
+                class=" dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 w-72 bg-clip-padding border-none"
+                aria-labelledby="user_info_dropdown">
+                <li class="flex px-5 pt-3 mb-3">
+                  <div class="left rounded-full w-12 h-12">
+                    <img class="rounded-full" src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt="Avatar">
+                  </div>
+                  <div class="right ml-5" *ngIf="auth.user$ | async as user">
+                    <div class="name font-normal">{{ user.name }}</div>
+                    <div class="identity text-gray-500 font-normal">Teacher</div>
+                  </div>
+                </li>
+
+                <li>
+                  <a class=" dropdown-item text-sm py-2 px-5 font-normal w-full cursor-pointer whitespace-nowrap bg-transparent  text-gray-700 flex gap-3 items-center hover:bg-gray-100"
+                    (click)="auth.logout({returnTo: document.location.origin})">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                      stroke="currentColor" class="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
   <div class="main flex h-full w-full flex-grow">
     <nav class="px-2 bg-blue-50 h-full hidden flex-col items-center gap-2 sm:flex">

@@ -1,0 +1,100 @@
+<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <!-- Jumbotron -->
+    <img [src]="labInfo.album" class="max-w-full h-auto" alt="..." />
+    <div class="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700">
+        <!-- <h2 class="font-semibold text-3xl mb-5">Hello world!</h2> -->
+        <p>
+            {{labInfo.description}}
+        </p>
+        <hr class="my-6 border-gray-300" />
+        <!-- Other information -->
+        <div class="other pl-1">
+            <div class="position">
+                <span class="font-bold">Position:&nbsp;</span>
+                <span class="hover:underline hover:cursor-pointer">{{labInfo.position}}</span>
+            </div>
+            <div class="openhours">
+                <span class="font-bold">Opens:</span>
+                <div class="body"></div>
+                <div class="open-hour flex" *ngFor="let item of labInfo.openHours">
+                    <div class="time flex" [ngClass]="item.isToday? 'order-first': ''">
+                        <div class="day w-20" [ngClass]="item.isToday? 'font-bold': ''">{{item.day}}
+                        </div>
+                        <div class="open">{{ item.open}}</div>
+                        <span>-</span>
+                        <div class="close">{{item.close}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Jumbotron -->
+
+    <!-- Seat list -->
+    <div class="flex flex-col">
+        <div class="py-2 inline-block min-w-full ">
+            <div class="overflow-hidden">
+                <table class="min-w-full">
+                    <thead class="bg-white border-b">
+                        <tr>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                #
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Alias
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Computer Type
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Is Availale?
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                Booking
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                            *ngFor="let seat of labInfo.seats">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{seat.id}}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {{seat.alias}}
+                            </td>
+                            <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap">
+                                <div class="types">
+                                    <div class="type hover:underline cursor-pointer">{{seat.computerType.name}}</div>
+                                </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-normal px-6 py-4 whitespace-nowrap ">
+
+                                <span [ngClass]="seat.isAvailable?' bg-blue-500 text-white':' bg-red-300 text-white'"
+                                    class="cursor-pointer rounded-full  px-5 py-0.5">{{seat.isAvailable
+                                    ? 'Yes' : "No"}}</span>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+
+                                <div class="flex justify-left" *ngIf="seat.isAvailable else notAvailable">
+                                    <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Book</button>
+                                </div>
+                                <ng-template #notAvailable>
+                                    <div class="flex justify-left">
+                                        <button type="button" disabled="disabled"
+                                            class="disabled inline-block cursor-not-allowed px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded  hover:bg-gray-300  focus:bg-gray-300  focus:outline-none focus:ring-0 active:bg-gray-400 transition duration-150 ease-in-out">Not
+                                            available</button>
+                                    </div>
+                                </ng-template>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

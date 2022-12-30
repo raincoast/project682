@@ -13,14 +13,9 @@
     </header>
     <hr />
     <div class="list my-3">
-        <div
-            class="lab-card flex shadow-[0_2px_15px_-9px_rgba(0,0,0,0.3)] p-3 rounded-2xl cursor-pointer hover:shadow-[0_2px_15px_-5px_rgba(0,0,0,0.3)]">
-            <img src="https://pbs.twimg.com/media/EInME8oWwAENtlY?format=jpg&name=4096x4096" alt=""
-                class="h-52 rounded-sm mr-5">
-            <div class="info">
-                <div class="title font-bold">Lab 1</div>
-                <div class="place"></div>
-            </div>
+        <div class="lab-card  shadow-[0_2px_15px_-9px_rgba(0,0,0,0.3)] rounded-2xl cursor-pointer hover:shadow-[0_2px_15px_-5px_rgba(0,0,0,0.3)]"
+            *ngFor="let lab of labList">
+            <app-info-card [lab]="lab"></app-info-card>
         </div>
     </div>
 </div>

@@ -3,14 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import "tw-elements"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { AuthModule } from '@auth0/auth0-angular';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthModule.forRoot({
+      domain: 'dev-27dgfgnycmwfb08m.uk.auth0.com',
+      clientId: 'hG72VXjX7oY0vPELtvW6jb5jvlsDXsYA',
+    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
