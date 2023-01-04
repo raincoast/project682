@@ -16,8 +16,13 @@ export class AppComponent implements OnInit {
   }
   switchPage(index: number) {
     this.currentSelectIndex = index
-
-
+  }
+  login() {
+    this.auth.loginWithPopup().subscribe(val => {
+      console.log(val);
+      // 登陆后需要刷新下页面
+      location.reload();
+    })
   }
 
 }
