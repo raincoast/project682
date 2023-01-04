@@ -7,12 +7,17 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   currentSelectIndex = 0
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
   ngOnInit(): void {
-
   }
   switchPage(index: number) {
     this.currentSelectIndex = index
+
+
   }
+
 }

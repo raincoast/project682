@@ -69,7 +69,16 @@
                   </div>
                   <div class="right ml-5" *ngIf="auth.user$ | async as user">
                     <div class="name font-normal">{{ user.name }}</div>
-                    <div class="identity text-gray-500 font-normal">Teacher</div>
+                    <ng-container *ngIf="auth.idTokenClaims$ | async as idToken">
+                      <div class="identity text-gray-500 font-normal"
+                        *ngIf="idToken['basic/roles'].length; else verify">{{
+                        idToken['basic/roles'][0]| titlecase}}</div>
+                      <ng-template #verify>
+                        <div class="identity text-gray-500 font-normal">{{
+                          'guest' | titlecase}}</div>
+                      </ng-template>
+                    </ng-container>
+
                   </div>
                 </li>
 
