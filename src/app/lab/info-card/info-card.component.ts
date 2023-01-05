@@ -7,7 +7,7 @@ import { Lab } from 'src/app/interfaces/lab';
   styleUrls: ['./info-card.component.css']
 })
 export class InfoCardComponent {
-  @Input() lab: Lab = {
+  @Input() lab: Partial<Lab> = {
     id: -1,
     album: "",
     name: "",

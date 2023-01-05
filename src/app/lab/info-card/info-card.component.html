@@ -1,4 +1,4 @@
-<div class="flex p-3" data-mdb-ripple="true" data-mdb-ripple-color="#aaaaaa" [routerLink]="[lab.id]">
+<div class="flex p-3" data-mdb-ripple="true" data-mdb-ripple-color="#aaaaaa" [routerLink]="['/lab/' + lab.id]">
     <img [src]="lab.album" alt="" class="h-52 rounded-sm mr-5">
     <div class="info cursor-pointer">
         <div class="title font-bold text-xl">{{lab.name}}</div>
@@ -11,7 +11,7 @@
         <div class="openhours flex flex-col text-sm">
             <span>Opens:</span>
             <div class="openHours flex flex-col">
-                <ng-container *ngIf="lab.openHours.length != 0">
+                <ng-container *ngIf="lab.openHours && lab.openHours.length != 0">
                     <ng-container *ngFor="let hour of lab.openHours">
                         <div class="hour flex hover:underline" [ngClass]="hour.isToday? 'order-first':''">
                             <div class="w-2/5" [ngClass]="hour.isToday?'font-bold':''">{{hour.day}}</div>

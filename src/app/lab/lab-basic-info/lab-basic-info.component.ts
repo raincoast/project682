@@ -8,5 +8,5 @@ import { Lab } from 'src/app/interfaces/lab';
   styleUrls: ['./lab-basic-info.component.css']
 })
 export class LabBasicInfoComponent {
-  @Input() labInfo!: Lab;
+  @Input() labInfo!: Partial<Lab>;
 }

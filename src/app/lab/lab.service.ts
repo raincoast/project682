@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { Auth0Client } from '@auth0/auth0-spa-js';
 import { EMPTY, Observable, of } from 'rxjs';
 import { Lab } from '../interfaces/lab';
 
@@ -7,42 +10,11 @@ import { Lab } from '../interfaces/lab';
 })
 export class LabService {
 
-  constructor() { }
-  list: Lab[] = [{
-    id: 1,
-    album: "https://pbs.twimg.com/media/EInME8oWwAENtlY?format=jpg&name=4096x4096",
-    name: "Lab1",
-    position: "BC-010-01",
-    description: "This is a test description of the lab 1, here have several seats",
-    totalSeats: 20,
-    availableSeats: 10,
-    openHours: [{ open: "9:15", close: "12:15", day: "Monday", isToday: false }, { open: "14:00", close: "17:00", day: "Tuesday", isToday: true }],
-    computerTypes: [{ id: 1, name: "MacOS" }, { id: 2, name: "Linux" }],
-    seats: [{
-      id: 1,
-      alias: 'C-1',
-      computerType: { id: 1, name: "MacOS" },
-      isAvailable: true
-    },
-    {
-      id: 2,
-      alias: 'C-2',
-      computerType: { id: 2, name: "Linux" },
-      isAvailable: false
-    },
-    {
-      id: 3,
-      alias: 'C-3',
-      computerType: { id: 2, name: "Linux" },
-      isAvailable: true
-    }]
-  }]
+  constructor(private http: HttpClient, private auth: AuthService) { }
   getLabInfo(id: number) {
-    let lab = this.list.filter(val => val.id == id)
-    return of(lab.length ? lab[0] : null)
+    return this.http.get(`http://127.0.0.1:10010/lab/info/${id}`);
   }
-  getLabList(): Observable<Lab[]> {
-
-    return of(this.list)
+  getLabList(): Observable<any> {
+    return this.http.get("http://127.0.0.1:10010/lab/list");
   }
 }

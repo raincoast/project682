@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import "tw-elements"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment as env } from 'src/environments/environments';
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,13 +15,20 @@ import { NotfoundComponent } from './notfound/notfound.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     AuthModule.forRoot({
-      domain: 'dev-27dgfgnycmwfb08m.uk.auth0.com',
-      clientId: 'hG72VXjX7oY0vPELtvW6jb5jvlsDXsYA',
+      ...env.auth,
+      httpInterceptor: {
+        allowedList: [`${env.dev.url}/*`]
+      }
     })
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
