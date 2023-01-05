@@ -17,5 +17,7 @@
             *ngFor="let lab of labList">
             <app-info-card [lab]="lab"></app-info-card>
         </div>
+        <div class="flex justify-center items-center" *ngIf="labList.length == 0">Can't find any labs, try to type
+            different keywords</div>
     </div>
 </div>

@@ -13,13 +13,23 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.getLabList(null)
   }
-  getLabList(filter: string | undefined | null) {
+  getLabList(filter: string | undefined | null, searchContent: String = "") {
     if (filter == null) {
-      this.labService.getLabList().subscribe((val: Lab[]) => {
-        this.labList = val
-        console.log(val)
-      })
+      if (searchContent == "") {
+        this.labService.getLabList().subscribe((val: Lab[]) => {
+          this.labList = val
+          console.log(val)
+        })
+      } else {
+
+        this.labService.getLabList().subscribe((val: Lab[]) => {
+          this.labList = val.filter((value: Lab) => value.name.indexOf(searchContent.valueOf()) != -1)
+          console.log(val)
+        })
+      }
+
     }
   }
+
 
 }
