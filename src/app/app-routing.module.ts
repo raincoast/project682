@@ -7,7 +7,6 @@ const routes: Routes = [{
   path: 'lab',
   loadChildren: () => import("./lab/lab.module").then(m => m.LabModule),
   data: { preload: true },
-  canActivate: [AuthGuard]
 }, {
   path: '',
   redirectTo: 'lab',
