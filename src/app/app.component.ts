@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     })
   }
   callTheSearch(event: any, value: string) {
-
+    console.log("call the search");
     if (this.currentPath == "lab") {
       // invoke the corresponding search function
       (this.outlet.component as MainComponent).search(event, value);

@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
     this.getLabList(null)
   }
   getLabList(filter: string | undefined | null, searchContent: String = "") {
+    console.log("call the get lab list", searchContent.valueOf());
     if (filter == null) {
       if (searchContent == "") {
         this.labService.getLabList().subscribe((val: Partial<Lab>[]) => {
@@ -47,13 +48,13 @@ export class ListComponent implements OnInit {
           console.log(val);
           this.labList = val;
         })
+      } else {
+        this.labList = this.labList.filter((value: Partial<Lab>) => {
+          console.log(value.name?.indexOf(searchContent.valueOf()))
+          console.log(searchContent);
+          return value.name?.indexOf(searchContent.valueOf()) != -1
+        })
       }
-    } else {
-
-      this.labService.getLabList().subscribe((val: Lab[]) => {
-        this.labList = this.labList.filter((value: Partial<Lab>) => value.name?.indexOf(searchContent.valueOf()) != -1)
-        console.log(val)
-      })
     }
 
   }

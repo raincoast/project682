@@ -12,6 +12,7 @@ import { ListComponent } from '../list/list.component';
 export class MainComponent {
   @ViewChild(RouterOutlet) outlet!: RouterOutlet;
   public search(event: any, content: string) {
+    console.log("call the search");
     if (this.outlet.component instanceof ListComponent) {
       (this.outlet.component as ListComponent).getLabList(null, content);
     }
